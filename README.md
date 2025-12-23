@@ -1,0 +1,2 @@
+# myrat-termux
+Ratnik
